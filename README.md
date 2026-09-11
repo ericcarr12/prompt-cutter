@@ -5,7 +5,7 @@ model — stripping filler words and redundant phrasing while preserving the
 task, the facts, and the constraints — so you spend fewer tokens per request
 without changing what you're asking for.
 
-**[Live demo](#)** — add your hosted link here
+**[Live demo](https://www.promptcutter.com)**
 
 ## What it does
 
