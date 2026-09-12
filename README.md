@@ -3,9 +3,7 @@
 A client-side tool that compresses prompts before you send them to an AI
 model — stripping filler words and redundant phrasing while preserving the
 task, the facts, and the constraints — so you spend fewer tokens per request
-without changing what you're asking for.
-
-**[Live website](https://www.promptcutter.com)**
+without changing what you're asking for. Live at [promptcutter.com](https://www.promptcutter.com).
 
 ## What it does
 
