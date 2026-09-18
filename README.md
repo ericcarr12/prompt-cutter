@@ -1,66 +1,44 @@
-# Prompt Cutter — Cut Input AI Token Usage
+# Prompt Cutter
 
-A client-side tool that compresses prompts before you send them to an AI
-model — stripping filler words and redundant phrasing while preserving the
-task, the facts, and the constraints — so you spend fewer tokens per request
-without changing what you're asking for. Live at [promptcutter.com](https://www.promptcutter.com).
+**Cut AI prompt token usage without losing meaning.**
 
-## What it does
+🔗 **Live site:** [https://www.promptcutter.com](https://www.promptcutter.com)
 
-Paste (or dictate) a prompt, and it:
+Prompt Cutter is a browser-based tool that compresses AI prompts to reduce token usage and stretch AI plan token limits further. It offers two compression modes:
 
-1. Detects the task type — write email, translate, fix a bug, summarize,
-   explain, generate content — from phrasing and keywords
-2. Strips stopwords, filler phrases, and redundant wording using a
-   dependency-free rule-based pipeline (no API call required for this mode)
-3. Tags the compressed prompt with a compact task marker so the receiving
-   model still knows exactly what's being asked
-4. Shows an estimated token count before/after, with a diff view of what
-   was cut
-5. Optionally, runs the same compression *live* through the Claude API for
-   a higher-quality result (bring-your-own API key, stored locally —
-   never sent anywhere but Anthropic)
+- **Basic** — offline, rule-based compression. Runs entirely client-side; nothing you type ever leaves your device.
+- **Turbo** — AI-powered compression via the Anthropic Claude API, using your own API key (BYOK — your key stays in your browser's local storage, never on our servers).
 
-Voice input is also wired up via the Web Speech API, for dictating a prompt
-instead of typing it.
+## Features
 
-## Why it's not just a demo
+- Automatic task-tag detection (e.g. summarize, generate, translate), with a diff view showing exactly what was trimmed
+- Voice input via the Web Speech API
+- Share directly to Email, X, Facebook, LinkedIn, WhatsApp, or Reddit — or the device's native share sheet on mobile
+- Fully responsive, mobile-first layout
+- Built and audited to WCAG 2.1 AA: full keyboard operability, managed focus for all modal dialogs, and screen-reader-friendly labeling throughout
 
-Every claim this tool makes about itself has actually been tested, and the
-results — including the parts that didn't work — are documented:
+## Repository structure
 
-- **Compression works, with a measured limit.** A 6-pair downstream A/B test
-  (same task, compressed vs. original prompt, fresh chat each side) found
-  translate/explain/generate came back essentially equivalent — no
-  measurable quality loss. Email, bug-fixing, and summarization each showed
-  a real but modest gap: specific details (a line number, an exact
-  duration) were present in the compressed prompt but engaged with less
-  precisely in the response.
-- **Offline mode is English-only, verified rather than assumed.** Testing
-  the same request in French, Spanish, and German against the actual
-  compression code showed reduction collapsing from 41% (English) to
-  roughly -2–3% for the others, with task detection failing outright.
-- **The accuracy figure is honestly scoped.** The 95%-accuracy number comes
-  from a 38-example set written in-house — documented as such, not
-  presented as an external benchmark.
+```
+.
+├── README.md          ← you are here
+├── index.html          ← minified production build (what's deployed to promptcutter.com)
+├── index-edit.html     ← readable source — edit this, then rebuild index.html
+└── images/             ← logo, icons, and share-platform assets referenced by index.html
+```
 
-## Stack
+## Legal & Proprietary Notice
 
-Vanilla HTML/CSS/JS, no build step, no dependencies. Web Speech API for
-voice input. Anthropic Claude API (Haiku) for the optional live-compression
-mode, called directly from the browser with a user-supplied key.
+Prompt Cutter, its logo, and its compression engine are the proprietary property of **Oxygen For Aliens LLC**. © 2026 Oxygen For Aliens LLC. All rights reserved.
 
-## Status
+This repository is made available for **viewing and reference purposes only**. Unless you have received prior written permission from Oxygen For Aliens LLC:
 
-The compression engine, task detection, and voice input are fully working.
-The credits counter, upload/share/members nav buttons, and pricing panel
-visible in the UI are front-end previews only — not yet wired to real
-functionality, since the backend they'd depend on (hosted API proxy,
-payment processing, usage limits) doesn't exist yet. See the project
-roadmap for what's planned next: a hosted-key mode so users don't need
-their own API key, and a browser extension as a likely better form factor
-than a standalone page.
+- You may **not** copy, reproduce, distribute, sublicense, or create derivative works from the code, algorithms, branding, or content in this repository, in whole or in part.
+- You may **not** use this code, or any substantially similar reimplementation of its compression logic, in any commercial or publicly deployed product or service.
+- You may **not** reverse-engineer, decompile, or deobfuscate any minified or obfuscated assets in this repository with the intent of extracting, copying, or re-implementing the underlying algorithms.
 
----
-*Formerly "Token Saver" — rebranded to Prompt Cutter with a dark navy/red
-visual identity.*
+No license, express or implied, to any patent, trademark, copyright, or other intellectual property right is granted by the publication of this repository. See [`LICENSE`](./LICENSE) for the full terms.
+
+For licensing inquiries, contact Oxygen For Aliens LLC directly.
+
+> This notice is provided for informational purposes and does not constitute legal advice. Consult a qualified attorney regarding enforcement of intellectual property rights.
